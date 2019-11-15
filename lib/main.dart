@@ -45,8 +45,8 @@ class _TypingDotsState extends State<TypingDots>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              ScaleTransition(
-                scale: Tween(begin: 1.0, end: 2.0)
+              SlideTransition(
+                position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
                     .animate(typingAnimationController),
                 child: Container(
                   width: radius,

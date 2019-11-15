@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 void main() => runApp(MaterialApp(home: TypingDots()));
 
 class CustomCurve extends Curve {
@@ -16,6 +17,32 @@ class CustomCurve extends Curve {
   }
 }
 
+class CustomCurve2 extends Curve {
+  @override
+  double transformInternal(double t) {
+    if (t > 0.4 && t <= 0.6) {
+      return t * 5 - 2;
+    } else if (t > 0.6 && t <= 0.8) {
+      return 2 - (t * 5);
+    } else {
+      return 0;
+    }
+  }
+}
+
+class CustomCurve3 extends Curve {
+  @override
+  double transformInternal(double t) {
+    if (t >= 0.6 && t <= 0.8) {
+      return t * 5;
+    } else if (t > 0.8 && t <= 1.0) {
+      return 2 - (t * 5);
+    } else {
+      return 0;
+    }
+  }
+}
+
 class TypingDots extends StatefulWidget {
   @override
   _TypingDotsState createState() => _TypingDotsState();
@@ -25,6 +52,8 @@ class _TypingDotsState extends State<TypingDots>
     with SingleTickerProviderStateMixin {
   double radius = 20.0;
   CustomCurve myCurve = CustomCurve();
+  CustomCurve2 myCurve2 = CustomCurve2();
+  CustomCurve3 myCurve3 = CustomCurve3();
   AnimationController typingAnimationController;
   @override
   void initState() {
@@ -52,6 +81,10 @@ class _TypingDotsState extends State<TypingDots>
   Widget build(BuildContext context) {
     CurvedAnimation smoothAnimation =
         CurvedAnimation(parent: typingAnimationController, curve: myCurve);
+    CurvedAnimation smoothAnimation2 =
+        CurvedAnimation(parent: typingAnimationController, curve: myCurve2);
+    CurvedAnimation smoothAnimation3 =
+        CurvedAnimation(parent: typingAnimationController, curve: myCurve2);
     return Scaffold(
       body: Center(
         child: Container(
@@ -77,7 +110,7 @@ class _TypingDotsState extends State<TypingDots>
               ),
               SlideTransition(
                 position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
-                    .animate(smoothAnimation),
+                    .animate(smoothAnimation2),
                 child: Container(
                   width: radius,
                   height: radius,
@@ -89,7 +122,7 @@ class _TypingDotsState extends State<TypingDots>
               ),
               SlideTransition(
                 position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
-                    .animate(smoothAnimation),
+                    .animate(smoothAnimation3),
                 child: Container(
                   width: radius,
                   height: radius,

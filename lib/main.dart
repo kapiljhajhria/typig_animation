@@ -15,6 +15,13 @@ class _TypingDotsState extends State<TypingDots>
   void initState() {
     typingAnimationController =
         AnimationController(duration: Duration(seconds: 1), vsync: this);
+    typingAnimationController.addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed) {
+        typingAnimationController.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        typingAnimationController.forward();
+      }
+    });
     typingAnimationController.addListener(() {
       setState(() {});
     });

@@ -57,9 +57,9 @@ class _TypingDotsState extends State<TypingDots>
                   ),
                 ),
               ),
-              Transform.scale(
-                scale: Tween(begin: 1.0, end: 2.0)
-                    .transform(typingAnimationController.value),
+              SlideTransition(
+                position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
+                    .animate(typingAnimationController),
                 child: Container(
                   width: radius,
                   height: radius,
@@ -69,9 +69,9 @@ class _TypingDotsState extends State<TypingDots>
                   ),
                 ),
               ),
-              Transform.scale(
-                scale: Tween(begin: 1.0, end: 2.0)
-                    .transform(typingAnimationController.value),
+              SlideTransition(
+                position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
+                    .animate(typingAnimationController),
                 child: Container(
                   width: radius,
                   height: radius,

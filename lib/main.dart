@@ -15,17 +15,19 @@ class _TypingDotsState extends State<TypingDots>
   void initState() {
     typingAnimationController =
         AnimationController(duration: Duration(seconds: 1), vsync: this);
-    typingAnimationController.addStatusListener((AnimationStatus status) {
-      if (status == AnimationStatus.completed) {
-        typingAnimationController.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        typingAnimationController.forward();
-      }
-    });
+//    typingAnimationController.addStatusListener((AnimationStatus status) {
+//      if (status == AnimationStatus.completed) {
+//        typingAnimationController.forward();
+//      } else if (status == AnimationStatus.dismissed) {
+//        typingAnimationController.forward();
+//      }
+//    });
     typingAnimationController.addListener(() {
       setState(() {});
     });
+
     typingAnimationController.forward();
+    typingAnimationController.repeat();
     // TODO: implement initState
     super.initState();
   }
@@ -43,9 +45,8 @@ class _TypingDotsState extends State<TypingDots>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Transform.scale(
-                scale: Tween(begin: 1.0, end: 2.0)
-                    .transform(typingAnimationController.value),
+              ScaleTransition(
+                scale: typingAnimationController,
                 child: Container(
                   width: radius,
                   height: radius,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'dart:math';
 
 void main() => runApp(MaterialApp(home: TypingDots()));
 
@@ -17,32 +17,6 @@ class CustomCurve extends Curve {
   }
 }
 
-class CustomCurve2 extends Curve {
-  @override
-  double transformInternal(double t) {
-    if (t > 0.4 && t <= 0.6) {
-      return t * 5 - 2;
-    } else if (t > 0.6 && t <= 0.8) {
-      return 2 - (t * 5);
-    } else {
-      return 0;
-    }
-  }
-}
-
-class CustomCurve3 extends Curve {
-  @override
-  double transformInternal(double t) {
-    if (t >= 0.6 && t <= 0.8) {
-      return t * 5;
-    } else if (t > 0.8 && t <= 1.0) {
-      return 2 - (t * 5);
-    } else {
-      return 0;
-    }
-  }
-}
-
 class TypingDots extends StatefulWidget {
   @override
   _TypingDotsState createState() => _TypingDotsState();
@@ -52,8 +26,8 @@ class _TypingDotsState extends State<TypingDots>
     with SingleTickerProviderStateMixin {
   double radius = 20.0;
   CustomCurve myCurve = CustomCurve();
-  CustomCurve2 myCurve2 = CustomCurve2();
-  CustomCurve3 myCurve3 = CustomCurve3();
+  CustomCurve myCurve2 = CustomCurve();
+  CustomCurve myCurve3 = CustomCurve();
   AnimationController typingAnimationController;
   @override
   void initState() {
@@ -79,12 +53,15 @@ class _TypingDotsState extends State<TypingDots>
 
   @override
   Widget build(BuildContext context) {
-    CurvedAnimation smoothAnimation =
-        CurvedAnimation(parent: typingAnimationController, curve: myCurve);
-    CurvedAnimation smoothAnimation2 =
-        CurvedAnimation(parent: typingAnimationController, curve: myCurve2);
-    CurvedAnimation smoothAnimation3 =
-        CurvedAnimation(parent: typingAnimationController, curve: myCurve2);
+    CurvedAnimation smoothAnimation = CurvedAnimation(
+        parent: typingAnimationController,
+        curve: Interval(0.0, 1.0, curve: myCurve));
+    CurvedAnimation smoothAnimation2 = CurvedAnimation(
+        parent: typingAnimationController,
+        curve: Interval(0.1, 1.0, curve: myCurve));
+    CurvedAnimation smoothAnimation3 = CurvedAnimation(
+        parent: typingAnimationController,
+        curve: Interval(0.2, 1.0, curve: myCurve));
     return Scaffold(
       body: Center(
         child: Container(

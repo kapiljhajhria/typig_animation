@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 void main() => runApp(MaterialApp(home: TypingDots()));
 
@@ -25,10 +24,10 @@ class TypingDots extends StatefulWidget {
 class _TypingDotsState extends State<TypingDots>
     with SingleTickerProviderStateMixin {
   double radius = 20.0;
+  AnimationController typingAnimationController;
   CustomCurve myCurve = CustomCurve();
   CustomCurve myCurve2 = CustomCurve();
   CustomCurve myCurve3 = CustomCurve();
-  AnimationController typingAnimationController;
   @override
   void initState() {
     typingAnimationController =
@@ -40,13 +39,12 @@ class _TypingDotsState extends State<TypingDots>
 //        typingAnimationController.forward();
 //      }
 //    });
-
     typingAnimationController.addListener(() {
-//      print(myCurve.transformInternal(typingAnimationController.value));
       setState(() {});
     });
 
-    typingAnimationController.repeat(reverse: false);
+    typingAnimationController.forward();
+    typingAnimationController.repeat();
     // TODO: implement initState
     super.initState();
   }

@@ -8,15 +8,11 @@ class CustomCurve extends Curve {
   CustomCurve({this.begin,this.end});
   @override
   double transformInternal(double t) {
-    double highPoint = (begin + end) / 2;
-    if (t == highPoint) {
-      return 1.0;
-    } else if (t >= begin && t < highPoint) {
-
-      return (t-begin)/0.2;
+    if (t >= begin && t <= (begin + .2)) {
+      return ((t*10)-(10*begin))*0.5;
     }
-    if (t > highPoint && t < end) {
-      return (end-t)/0.2;
+    if (t >= (begin + .2) && t <= end) {
+      return (((end*10)-(t*10))*0.5);
     } else {
       return 0;
     }
@@ -32,9 +28,9 @@ class _TypingDotsState extends State<TypingDots>
     with SingleTickerProviderStateMixin {
   double radius = 20.0;
   AnimationController typingAnimationController;
-  CustomCurve myCurve = CustomCurve(begin: 0.0 , end: 0.4);
-  CustomCurve myCurve2 = CustomCurve(begin: 0.2 , end: 0.6);
-  CustomCurve myCurve3 = CustomCurve(begin: 0.4 , end: 0.8);
+  CustomCurve myCurve = CustomCurve(begin: 0.0 , end: 0.4);// 0.2 output should be 1
+  CustomCurve myCurve2 = CustomCurve(begin: 0.1 , end: 0.5);//0.3 output should be 1
+  CustomCurve myCurve3 = CustomCurve(begin: 0.2 , end: 0.6);//0.4 output should be 1
 
   @override
   void initState() {
@@ -68,7 +64,8 @@ class _TypingDotsState extends State<TypingDots>
     CurvedAnimation smoothAnimation3 = CurvedAnimation(
         parent: typingAnimationController,
         curve: myCurve3);
-        print(myCurve2.transform(0.4));
+        print(myCurve3.transform(0.4));
+        print(myCurve2.transform(0.3));
     return Scaffold(
       body: Center(
         child: Container(

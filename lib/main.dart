@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 void main() => runApp(MaterialApp(home: TypingDots()));
 
 class CustomCurve extends Curve {
+  double begin;
+  double end;
+  CustomCurve({this.begin,this.end});
   @override
   double transformInternal(double t) {
-    if (t >= 0 && t <= 0.2) {
-      return t * 5;
+    double highPoint = (begin + end) / 2;
+    if (t == highPoint) {
+      return 1.0;
+    } else if (t >= begin && t < highPoint) {
+
+      return (t-begin)/0.2;
     }
-    if (t > 0.2 && t <= 0.4) {
-      return 2 - (t * 5);
+    if (t > highPoint && t < end) {
+      return (end-t)/0.2;
     } else {
       return 0;
     }
@@ -25,9 +32,10 @@ class _TypingDotsState extends State<TypingDots>
     with SingleTickerProviderStateMixin {
   double radius = 20.0;
   AnimationController typingAnimationController;
-  CustomCurve myCurve = CustomCurve();
-  CustomCurve myCurve2 = CustomCurve();
-  CustomCurve myCurve3 = CustomCurve();
+  CustomCurve myCurve = CustomCurve(begin: 0.0 , end: 0.4);
+  CustomCurve myCurve2 = CustomCurve(begin: 0.2 , end: 0.6);
+  CustomCurve myCurve3 = CustomCurve(begin: 0.4 , end: 0.8);
+
   @override
   void initState() {
     typingAnimationController =
@@ -53,13 +61,14 @@ class _TypingDotsState extends State<TypingDots>
   Widget build(BuildContext context) {
     CurvedAnimation smoothAnimation = CurvedAnimation(
         parent: typingAnimationController,
-        curve: Interval(0.0, 1.0, curve: myCurve));
+        curve: myCurve);
     CurvedAnimation smoothAnimation2 = CurvedAnimation(
         parent: typingAnimationController,
-        curve: Interval(0.1, 1.0, curve: myCurve));
+        curve: myCurve2);
     CurvedAnimation smoothAnimation3 = CurvedAnimation(
         parent: typingAnimationController,
-        curve: Interval(0.2, 1.0, curve: myCurve));
+        curve: myCurve3);
+        print(myCurve2.transform(0.4));
     return Scaffold(
       body: Center(
         child: Container(

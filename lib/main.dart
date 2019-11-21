@@ -4,15 +4,14 @@ void main() => runApp(MaterialApp(home: TypingDots()));
 
 class CustomCurve extends Curve {
   double begin;
-  double end;
-  CustomCurve({this.begin,this.end});
+  CustomCurve({this.begin});
   @override
   double transformInternal(double t) {
     if (t >= begin && t <= (begin + .2)) {
       return ((t*10)-(10*begin))*0.5;
     }
-    if (t >= (begin + .2) && t <= end) {
-      return (((end*10)-(t*10))*0.5);
+    if (t >= (begin + .2) && t <= (begin+0.4)) {
+      return ((((begin+0.4)*10)-(t*10))*0.5);
     } else {
       return 0;
     }
@@ -28,9 +27,9 @@ class _TypingDotsState extends State<TypingDots>
     with SingleTickerProviderStateMixin {
   double radius = 20.0;
   AnimationController typingAnimationController;
-  CustomCurve myCurve = CustomCurve(begin: 0.0 , end: 0.4);// 0.2 output should be 1
-  CustomCurve myCurve2 = CustomCurve(begin: 0.1 , end: 0.5);//0.3 output should be 1
-  CustomCurve myCurve3 = CustomCurve(begin: 0.2 , end: 0.6);//0.4 output should be 1
+  CustomCurve myCurve = CustomCurve(begin: 0.0);// 0.2 output should be 1
+  CustomCurve myCurve2 = CustomCurve(begin: 0.1);//0.3 output should be 1
+  CustomCurve myCurve3 = CustomCurve(begin: 0.2);//0.4 output should be 1
 
   @override
   void initState() {

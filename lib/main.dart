@@ -27,28 +27,12 @@ class _TypingDotsState extends State<TypingDots>
     with SingleTickerProviderStateMixin {
   double radius = 20.0;
   AnimationController typingAnimationController;
-  CustomCurve myCurve = CustomCurve(begin: 0.0 );// 0.2 output should be 1
-  CustomCurve myCurve2 = CustomCurve(begin: 0.1 );//0.3 output should be 1
-  CustomCurve myCurve3 = CustomCurve(begin: 0.2 );//0.4 output should be 1
 
   @override
   void initState() {
     typingAnimationController =
         AnimationController(duration: Duration(seconds: 1), vsync: this);
-//    typingAnimationController.addStatusListener((AnimationStatus status) {
-//      if (status == AnimationStatus.completed) {
-//        typingAnimationController.forward();
-//      } else if (status == AnimationStatus.dismissed) {
-//        typingAnimationController.forward();
-//      }
-//    });
-    typingAnimationController.addListener(() {
-      setState(() {});
-    });
-
-    typingAnimationController.forward();
-    typingAnimationController.repeat();
-    // TODO: implement initState
+        typingAnimationController.repeat();
     super.initState();
   }
 
@@ -56,15 +40,13 @@ class _TypingDotsState extends State<TypingDots>
   Widget build(BuildContext context) {
     CurvedAnimation smoothAnimation = CurvedAnimation(
         parent: typingAnimationController,
-        curve: myCurve);
+        curve: CustomCurve(begin: 0.0 ));
     CurvedAnimation smoothAnimation2 = CurvedAnimation(
         parent: typingAnimationController,
-        curve: myCurve2);
+        curve: CustomCurve(begin: 0.2 ));
     CurvedAnimation smoothAnimation3 = CurvedAnimation(
         parent: typingAnimationController,
-        curve: myCurve3);
-        print(myCurve3.transform(0.4));
-        print(myCurve2.transform(0.3));
+        curve: CustomCurve(begin: 0.3 ));
     return Scaffold(
       body: Center(
         child: Container(

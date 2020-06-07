@@ -47,56 +47,52 @@ class _TypingDotsState extends State<TypingDots>
     CurvedAnimation smoothAnimation3 = CurvedAnimation(
         parent: typingAnimationController,
         curve: CustomCurve(begin: 0.3 ));
-    return Scaffold(
-      body: Center(
-        child: Container(
-          height: 150,
-          width: 200,
-          decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.all(Radius.circular(70.0))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              SlideTransition(
-                position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
-                    .animate(smoothAnimation),
-                child: Container(
-                  width: radius,
-                  height: radius,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    shape: BoxShape.circle,
-                  ),
-                ),
+    return Container(
+      height: 150,
+      width: 200,
+      decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.all(Radius.circular(70.0))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          SlideTransition(
+            position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
+                .animate(smoothAnimation),
+            child: Container(
+              width: radius,
+              height: radius,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
               ),
-              SlideTransition(
-                position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
-                    .animate(smoothAnimation2),
-                child: Container(
-                  width: radius,
-                  height: radius,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-              SlideTransition(
-                position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
-                    .animate(smoothAnimation3),
-                child: Container(
-                  width: radius,
-                  height: radius,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          SlideTransition(
+            position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
+                .animate(smoothAnimation2),
+            child: Container(
+              width: radius,
+              height: radius,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          SlideTransition(
+            position: Tween(begin: Offset.zero, end: Offset(0.0, -2.0))
+                .animate(smoothAnimation3),
+            child: Container(
+              width: radius,
+              height: radius,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
